@@ -1,0 +1,45 @@
+{
+  "id": "1",
+  "name": "my radar chart",
+  "data": {
+    "options": {
+      "lineWidth": 2,
+      "lineColor": "#ececec",
+      "textColor": "#353535"
+    },
+    "titles": [
+      "two",
+      "one",
+      "three",
+      "four",
+      "five",
+      "six"
+    ],
+    "fills": [
+      {
+        "name": "not shown",
+        "color": "#ececec",
+        "data": {
+          "one": 0.1,
+          "two": 0.5,
+          "three": 1,
+          "four": 0.4,
+          "five": 0.8,
+          "six": 0.1
+        }
+      },
+      {
+        "name": "not shown",
+        "color": "#ececec",
+        "data": {
+          "one": 0.8,
+          "two": 0.2,
+          "three": 0.6,
+          "four": 0.9,
+          "five": 0.2,
+          "six": 0.4
+        }
+      }
+    ]
+  }
+}

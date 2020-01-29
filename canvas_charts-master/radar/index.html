@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>canvas_charts - radar</title>
+</head>
+
+<body>
+<script src="js/jquery-3.4.1.js"></script>
+<script src="js/radarChart.js"></script>
+
+<h1>canvas_charts - radar</h1>
+
+<input id="text_dataUrl" type="text" style="width: 80%"
+       value="https://raw.githubusercontent.com/pufferbatterie/canvas_charts/master/radar/data/example.json" />
+<input id="btn_draw" type="button" value="draw!" />
+<br/><br/>
+<div id="tablespace"></div>
+
+<script>
+    "use strict";
+    (function () {
+
+        function constructTable(radarData) {
+            const table = document.createElement("table");
+
+            const thead = document.createElement("thead");
+            const thead_tr = document.createElement("tr");
+            radarData.titles.forEach(function (title) {
+                const th = document.createElement("th");
+                const th_text = document.createTextNode(title);
+                th.appendChild(th_text);
+                thead_tr.appendChild(th);
+            });
+            thead.appendChild(thead_tr);
+            table.appendChild(thead);
+
+            const tbody = document.createElement("tbody");
+            radarData.fills.forEach(function (fill) {
+                const tbody_tr = document.createElement("tr");
+                tbody_tr.dataset.radarColor = fill.color;
+                radarData.titles.forEach(function (title) {
+                    const td = document.createElement("td");
+                    const td_text = document.createTextNode(fill.data[title] * 100);
+                    td.appendChild(td_text);
+                    tbody_tr.appendChild(td);
+                });
+                tbody.appendChild(tbody_tr);
+            });
+            table.appendChild(tbody);
+
+            return table;
+        }
+
+        $("#btn_draw").click(function () {
+            fetch($("#text_dataUrl").val())
+                .then(resp => resp.json())
+                .then(function (resp) {
+                    const t = constructTable(resp.data);
+                    document.querySelector('#tablespace').appendChild(t);
+                    $(t).radar_chart();
+                });
+        });
+
+    })();
+</script>
+
+</body>
+</html>
